@@ -1,0 +1,11 @@
+name: learndart
+description: learndart
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+dependencies:
+  intl: ^0.17.0
+  decimal:
+  uuid: 3.0.4
+
+  http: ^0.13.3
+
