@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import './models/weather.dart';
 // todo В функции weather сделать возможность передачи функции города
+// todo remove Function.dart from project
+// todo weather file from project
+
 void main()async{
   // for (var i = 0; i < 1; i++) {
   //   final result = await getInput();

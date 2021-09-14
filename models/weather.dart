@@ -4,6 +4,7 @@ class Weather {
   final double humidity;
   final String country;
   final double speed;
+  // Todo Description field not double is should be String!
   final double description;
   final double all;
 
