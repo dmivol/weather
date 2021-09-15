@@ -4,7 +4,7 @@ class Weather {
   final double humidity;
   final String country;
   final double speed;
-  final double description;
+  final String description;
   final double all;
 
   Weather(this.lon, this.lat, this.humidity, this.country, this.speed, this.description,
@@ -16,6 +16,6 @@ class Weather {
         humidity = double.parse('${json['main']['humidity']}'),
         country = json['sys']['country'],
         speed = double.parse('${json['wind']['speed']}'),
-        description = json['weather']['description'],
+        description = json['weather'].first['description'],
         all = double.parse('${json['clouds']['all']}');
 }
