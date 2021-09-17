@@ -3,23 +3,19 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import './models/weather.dart';
 
-// todo В функции weather сделать возможность передачи функции города
+//todo Вернуть из getWeatherByCity экземпляр модели Weather либо ошибку
+// Обработать ошибку 404 и вернуть ошибку или исключение с - неправильный url-запрос,
+// ошибка - что-то пошло не так
 void main() async {
-  getWeather() {
-  }
-  }
-getWeather() {
-  for (var i = 0; i < 1; i++) {
-    final city = getInput();
-    print('Ваш город - это $city');
-    if (city.isEmpty) {
-      print('Вы не вввели название города');
-    }
-  }
+  getWeather();
 }
 
-
-
+Future<void> getWeather() async {
+  for (var i = 0; i < 3; i++) {
+    final city = await getInput();
+    print('Ваш город - это $city');
+    if (city.isNotEmpty) {
+      final weather = await getWeatherByCity(city);
     }
   }
 }
@@ -29,12 +25,12 @@ Future<String> getInput() async {
   return stdin.readLineSync();
 }
 
-Future<String> getWeather(String city) async {
+Future<Weather> getWeatherByCity(String city) async {
   var url = Uri.parse(
       'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=459f6c565802e5a2171df04458b9a193');
   var response = await http.get(url);
-  print(response.statusCode);
-  print(response.body);
+  //print(response.statusCode);
+  //print(response.body);
 
   if (response.statusCode == 200) {
     var jsonResponse =
@@ -48,7 +44,12 @@ Future<String> getWeather(String city) async {
     print(weather.speed);
     print(weather.description);
     print(weather.all);
-  } else {
+    return weather;
+  } else if(response.statusCode == 404){
     print('Request failed with status: ${response.statusCode}.');
+  }else if(response.statusCode == 403){
+    print('Forbidden: ${response.statusCode}.');
+  }else{
+    print('Завершение программы');
   }
 }
