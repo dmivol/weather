@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import './models/weather.dart';
-
-//todo Вернуть из getWeatherByCity экземпляр модели Weather либо ошибку
+// todo Правильно ли сделан блок 34-43?
+// Вернуть из getWeatherByCity экземпляр модели Weather либо ошибку
 // Обработать ошибку 404 и вернуть ошибку или исключение с - неправильный url-запрос,
 // ошибка - что-то пошло не так
 // создать метод showtoconsol - превращаем поля модели в строки (спецсимволы для
