@@ -19,10 +19,9 @@ Future<void> getWeather() async {
     if (city.isNotEmpty) {
       try {
         final weather = await getWeatherByCity(city);
-      }catch (e) {
+      } catch (e) {
         print(e);
       }
-
     }
   }
 }
@@ -32,17 +31,28 @@ Future<String> getInput() async {
   return stdin.readLineSync();
 }
 
+Future<String> getInput1() async {
+  String input1 = '';
+  print(
+      'Вы хотите продолжить работу программы?: (Если Да - нажмите клавишу Y)');
+  if (input1 == 'Y') {
+    return stdin.readLineSync();
+  } else {
+    exit(0);
+  }
+}
+
 Future<Weather> getWeatherByCity(String city) async {
-        var url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=459f6c565802e5a2171df04458b9a193');
-    var response = await http.get(url);
-    print(response.statusCode);
+  var url = Uri.parse(
+      'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=459f6c565802e5a2171df04458b9a193');
+  var response = await http.get(url);
+  print(response.statusCode);
 
   //print(response.body);
 
   if (response.statusCode == 200) {
     var jsonResponse =
-    convert.jsonDecode(response.body) as Map<String, dynamic>;
+        convert.jsonDecode(response.body) as Map<String, dynamic>;
     var weather = Weather.fromJson(jsonResponse);
     print(weather);
     print(weather.lon);
